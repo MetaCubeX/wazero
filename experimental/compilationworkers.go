@@ -15,5 +15,8 @@ func WithCompilationWorkers(ctx context.Context, workers int) context.Context {
 // The minimum value returned is 1.
 func GetCompilationWorkers(ctx context.Context) int {
 	workers, _ := ctx.Value(expctxkeys.CompilationWorkers{}).(int)
-	return max(workers, 1)
+	if workers < 1 {
+		workers = 1
+	}
+	return workers
 }

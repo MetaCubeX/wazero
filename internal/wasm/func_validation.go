@@ -2380,7 +2380,9 @@ func (sts *stacks) reset(functionType *FunctionType) {
 	sts.cs.stack = sts.cs.stack[:0]
 	sts.cs.stack = append(sts.cs.stack, controlBlock{blockType: functionType})
 	sts.ls = sts.ls[:0]
-	clear(sts.initLocals)
+	for key := range sts.initLocals {
+		delete(sts.initLocals, key)
+	}
 	if sts.initLocals == nil {
 		sts.initLocals = make(map[uint32]struct{})
 	}

@@ -51,7 +51,9 @@ func NewEngine(_ context.Context, enabledFeatures api.CoreFeatures, _ filecache.
 func (e *engine) Close() (err error) {
 	e.mux.Lock()
 	defer e.mux.Unlock()
-	clear(e.compiledFunctions)
+	for key := range e.compiledFunctions {
+		delete(e.compiledFunctions, key)
+	}
 	return
 }
 
@@ -1929,11 +1931,16 @@ func (ce *callEngine) callNativeFunc(ctx context.Context, m *wasm.ModuleInstance
 				// https://github.com/golang/go/blob/go1.24.0/src/bytes/bytes.go#L664-L673
 				buf := memoryInst.Buffer[offset : offset+fillSize]
 				if value == 0 {
-					clear(buf)
+					for i := range buf {
+						buf[i] = 0
+					}
 				} else {
 					buf[0] = value
 					for i := 1; i < len(buf); {
-						chunk := min(i, 8192)
+						chunk := i
+						if i > 8192 {
+							chunk = 8192
+						}
 						i += copy(buf[i:], buf[:chunk])
 					}
 				}
