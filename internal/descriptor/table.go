@@ -2,7 +2,6 @@ package descriptor
 
 import (
 	"math/bits"
-	"slices"
 )
 
 // Table is a data structure mapping 32 bit descriptor to items.
@@ -43,10 +42,21 @@ func (t *Table[Key, Item]) Len() (n int) {
 // grow grows the table by n * 64 items.
 func (t *Table[Key, Item]) grow(n int) {
 	total := len(t.masks) + n
-	t.masks = slices.Grow(t.masks, n)[:total]
+	t.masks = slicesGrow(t.masks, n)[:total]
 
 	total = len(t.items) + n*64
-	t.items = slices.Grow(t.items, n*64)[:total]
+	t.items = slicesGrow(t.items, n*64)[:total]
+}
+
+func slicesGrow[S ~[]E, E any](s S, n int) S {
+	if n < 0 {
+		panic("cannot be negative")
+	}
+	if n -= cap(s) - len(s); n > 0 {
+		// This expression allocates only once (see test).
+		s = append(s[:cap(s)], make([]E, n)...)[:len(s)]
+	}
+	return s
 }
 
 // Insert inserts the given item to the table, returning the key that it is
