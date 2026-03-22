@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"runtime"
-	"slices"
 	"sort"
 	"sync"
 	"sync/atomic"
@@ -349,8 +348,8 @@ func (e *engine) compileModule(ctx context.Context, module *wasm.Module, listene
 						fctx, i, fidx, body,
 						// These slices are internal to the backend compiler and since we are going to buffer them instead
 						// of process them immediately we need to copy the memory.
-						slices.Clone(relsPerFunc),
-						slices.Clone(be.SourceOffsetInfo()),
+						cloneSlice(relsPerFunc),
+						cloneSlice(be.SourceOffsetInfo()),
 					}
 				}
 			}()
@@ -471,7 +470,7 @@ func (r *engineRelocator) appendFunction(
 
 	// At this point, relocation offsets are relative to the start of the function body,
 	// so we adjust it to the start of the executable.
-	r.rels = slices.Grow(r.rels, len(relsPerFunc))
+	r.rels = slicesGrow(r.rels, len(relsPerFunc))
 	for _, rel := range relsPerFunc {
 		rel.Offset += int64(r.totalSize)
 		r.rels = append(r.rels, rel)
@@ -538,7 +537,7 @@ func (e *engine) compileLocalWasmFunction(
 	}
 
 	// TODO: optimize as zero copy.
-	return slices.Clone(original), rels, nil
+	return cloneSlice(original), rels, nil
 }
 
 func (e *engine) compileHostModule(ctx context.Context, module *wasm.Module, listeners []experimental.FunctionListener) (*compiledModule, error) {
@@ -610,7 +609,7 @@ func (e *engine) compileHostModule(ctx context.Context, module *wasm.Module, lis
 		}
 
 		// TODO: optimize as zero copy.
-		bodies[i] = slices.Clone(body)
+		bodies[i] = cloneSlice(body)
 		totalSize += len(body)
 	}
 
@@ -1005,4 +1004,22 @@ func (cm *compiledModule) getSourceOffset(pc uintptr) uint64 {
 		return 0
 	}
 	return cm.sourceMap.wasmBinaryOffsets[index]
+}
+
+func cloneSlice[S ~[]E, E any](s S) S {
+	if s == nil {
+		return nil
+	}
+	return append(S{}, s...)
+}
+
+func slicesGrow[S ~[]E, E any](s S, n int) S {
+	if n < 0 {
+		panic("cannot be negative")
+	}
+	if n -= cap(s) - len(s); n > 0 {
+		// This expression allocates only once (see test).
+		s = append(s[:cap(s)], make([]E, n)...)[:len(s)]
+	}
+	return s
 }

@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"maps"
-	"slices"
 	"strconv"
 	"strings"
 
@@ -493,9 +492,11 @@ func (m *Module) validateFunctionWithMaxStackValues(
 			// function type might result in invalid value types if the block is the outermost label
 			// which equals the function's type.
 			if lnLabel.op != OpcodeLoop { // Loop operation doesn't require results since the continuation is the beginning of the loop.
-				defaultLabelType = slices.Clone(lnLabel.blockType.Results)
+				defaultLabelType = make([]ValueType, len(lnLabel.blockType.Results))
+				copy(defaultLabelType, lnLabel.blockType.Results)
 			} else {
-				defaultLabelType = slices.Clone(lnLabel.blockType.Params)
+				defaultLabelType = make([]ValueType, len(lnLabel.blockType.Params))
+				copy(defaultLabelType, lnLabel.blockType.Params)
 			}
 
 			if enabledFeatures.IsEnabled(api.CoreFeatureReferenceTypes) {
@@ -2176,7 +2177,7 @@ func (m *Module) validateFunctionWithMaxStackValues(
 			if ifMissingElse {
 				// If this is the end of block without else, the number of block's results and params must be same.
 				// Otherwise, the value stack would result in the inconsistent state at runtime.
-				if !slices.Equal(bl.blockType.Results, bl.blockType.Params) {
+				if !slicesEqual(bl.blockType.Results, bl.blockType.Params) {
 					return typeCountError(false, OpcodeElseName, bl.blockType.Params, bl.blockType.Results)
 				}
 				// -1 skips else, to handle if block without else properly.
@@ -2803,4 +2804,22 @@ func SplitCallStack(ft *FunctionType, stack []uint64) (params []uint64, results 
 		results = stack[:n]
 	}
 	return
+}
+
+// Equal reports whether two slices are equal: the same length and all
+// elements equal. If the lengths are different, Equal returns false.
+// Otherwise, the elements are compared in increasing index order, and the
+// comparison stops at the first unequal pair.
+// Empty and nil slices are considered equal.
+// Floating point NaNs are not considered equal.
+func slicesEqual[S ~[]E, E comparable](s1, s2 S) bool {
+	if len(s1) != len(s2) {
+		return false
+	}
+	for i := range s1 {
+		if s1[i] != s2[i] {
+			return false
+		}
+	}
+	return true
 }

@@ -6,7 +6,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"slices"
 	"sort"
 	"strings"
 	"sync"
@@ -844,7 +843,7 @@ func (f *FunctionType) CacheNumInUint64() {
 
 // EqualsSignature returns true if the function type has the same parameters and results.
 func (f *FunctionType) EqualsSignature(params []ValueType, results []ValueType) bool {
-	return slices.Equal(f.Params, params) && slices.Equal(f.Results, results)
+	return slicesEqual(f.Params, params) && slicesEqual(f.Results, results)
 }
 
 // EqualsType returns true if the function types are structurally equal AND

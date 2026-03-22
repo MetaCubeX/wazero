@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"math"
 	"math/bits"
-	"slices"
 	"sync"
 	"unsafe"
 
@@ -192,11 +191,11 @@ func matchCatchClause(kind byte, clauseTag *wasm.TagInstance, exn *wasm.Exceptio
 	switch kind {
 	case wasm.CatchKindCatch:
 		if exn.Tag == clauseTag {
-			return true, slices.Clone(exn.Params)
+			return true, append([]uint64{}, exn.Params...)
 		}
 	case wasm.CatchKindCatchRef:
 		if exn.Tag == clauseTag {
-			values = slices.Clone(exn.Params)
+			values = append([]uint64{}, exn.Params...)
 			values = append(values, uint64(uintptr(unsafe.Pointer(exn))))
 			return true, values
 		}
@@ -395,9 +394,15 @@ type snapshot struct {
 
 // Snapshot implements the same method as documented on experimental.Snapshotter.
 func (ce *callEngine) Snapshot() experimental.Snapshot {
+	stack := make([]uint64, len(ce.stack))
+	copy(stack, ce.stack)
+
+	frames := make([]*callFrame, len(ce.frames))
+	copy(frames, ce.frames)
+
 	return &snapshot{
-		stack:  slices.Clone(ce.stack),
-		frames: slices.Clone(ce.frames),
+		stack:  stack,
+		frames: frames,
 		ce:     ce,
 	}
 }
@@ -578,10 +583,12 @@ func (e *engine) NewModuleEngine(module *wasm.Module, instance *wasm.ModuleInsta
 // lowerIR lowers the interpreterir operations to engine friendly struct.
 func (e *engine) lowerIR(ir *compilationResult, ret *compiledFunction) error {
 	// Copy the body from the result.
-	ret.body = slices.Clone(ir.Operations)
+	ret.body = make([]unionOperation, len(ir.Operations))
+	copy(ret.body, ir.Operations)
 	// Also copy the offsets if necessary.
 	if offsets := ir.IROperationSourceOffsetsInWasmBinary; len(offsets) > 0 {
-		ret.offsetsInWasmBinary = slices.Clone(offsets)
+		ret.offsetsInWasmBinary = make([]uint64, len(offsets))
+		copy(ret.offsetsInWasmBinary, offsets)
 	}
 
 	labelAddressResolutions := [labelKindNum][]uint64{}
