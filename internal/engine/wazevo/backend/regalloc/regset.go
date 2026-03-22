@@ -55,7 +55,9 @@ func newRegInUseSet[I Instr, B Block[I], F Function[I, B]]() regInUseSet[I, B, F
 }
 
 func (rs *regInUseSet[I, B, F]) reset() {
-	clear(rs[:])
+	for i := range rs {
+		rs[i] = nil
+	}
 }
 
 func (rs *regInUseSet[I, B, F]) format(info *RegisterInfo) string { //nolint:unused

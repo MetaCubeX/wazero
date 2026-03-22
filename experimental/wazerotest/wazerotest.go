@@ -379,7 +379,9 @@ func (f *Function) Call(ctx context.Context, params ...uint64) ([]uint64, error)
 	copy(stack, params)
 	err := f.CallWithStack(ctx, stack)
 	if err != nil {
-		clear(stack)
+		for i := range stack {
+			stack[i] = 0
+		}
 	}
 	return stack[:len(f.ResultTypes)], err
 }

@@ -291,7 +291,7 @@ func (e *engine) compileModule(ctx context.Context, module *wasm.Module, listene
 		var wg sync.WaitGroup
 		wg.Add(workers)
 
-		for range workers {
+		for i := 0; i < workers; i++ {
 			go func() {
 				defer wg.Done()
 
