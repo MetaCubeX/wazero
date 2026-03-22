@@ -1,4 +1,4 @@
-module github.com/tetratelabs/wazero
+module github.com/metacubex/wazero
 
 go 1.20
 

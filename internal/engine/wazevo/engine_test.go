@@ -8,10 +8,10 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/internal/platform"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/metacubex/wazero/experimental"
+	"github.com/metacubex/wazero/internal/platform"
+	"github.com/metacubex/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/internal/wasm"
 )
 
 func Test_sharedFunctionsFinalizer(t *testing.T) {

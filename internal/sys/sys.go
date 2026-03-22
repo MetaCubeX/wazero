@@ -7,9 +7,9 @@ import (
 	"net"
 	"time"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/platform"
-	"github.com/tetratelabs/wazero/sys"
+	experimentalsys "github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/internal/platform"
+	"github.com/metacubex/wazero/sys"
 )
 
 // Context holds module-scoped system resources currently only supported by

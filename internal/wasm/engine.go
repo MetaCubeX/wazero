@@ -3,8 +3,8 @@ package wasm
 import (
 	"context"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/experimental"
 )
 
 // Engine is a Store-scoped mechanism to compile functions declared or imported by a module.

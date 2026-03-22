@@ -4,10 +4,10 @@ import (
 	"net"
 	"os"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/fsapi"
-	socketapi "github.com/tetratelabs/wazero/internal/sock"
-	"github.com/tetratelabs/wazero/sys"
+	experimentalsys "github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/internal/fsapi"
+	socketapi "github.com/metacubex/wazero/internal/sock"
+	"github.com/metacubex/wazero/sys"
 )
 
 // NewTCPListenerFile creates a socketapi.TCPSock for a given *net.TCPListener.

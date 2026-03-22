@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental/wazerotest"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/experimental/wazerotest"
+	"github.com/metacubex/wazero/internal/testing/require"
 )
 
 func Test_callOnPanic(t *testing.T) {

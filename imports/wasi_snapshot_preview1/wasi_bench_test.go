@@ -6,15 +6,15 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/api"
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
-	"github.com/tetratelabs/wazero/internal/sys"
-	"github.com/tetratelabs/wazero/internal/testing/proxy"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/wasip1"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/metacubex/wazero"
+	"github.com/metacubex/wazero/api"
+	experimentalsys "github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/imports/wasi_snapshot_preview1"
+	"github.com/metacubex/wazero/internal/sys"
+	"github.com/metacubex/wazero/internal/testing/proxy"
+	"github.com/metacubex/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/internal/wasip1"
+	"github.com/metacubex/wazero/internal/wasm"
 )
 
 // configArgsEnviron ensures the result data are the same between args and ENV.

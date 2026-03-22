@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/internal/leb128"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/internal/leb128"
+	"github.com/metacubex/wazero/internal/wasm"
 )
 
 func ensureElementKindFuncRef(r *bytes.Reader) error {

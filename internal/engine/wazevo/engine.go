@@ -11,16 +11,16 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/frontend"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/ssa"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/wazevoapi"
-	"github.com/tetratelabs/wazero/internal/filecache"
-	"github.com/tetratelabs/wazero/internal/platform"
-	"github.com/tetratelabs/wazero/internal/version"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/experimental"
+	"github.com/metacubex/wazero/internal/engine/wazevo/backend"
+	"github.com/metacubex/wazero/internal/engine/wazevo/frontend"
+	"github.com/metacubex/wazero/internal/engine/wazevo/ssa"
+	"github.com/metacubex/wazero/internal/engine/wazevo/wazevoapi"
+	"github.com/metacubex/wazero/internal/filecache"
+	"github.com/metacubex/wazero/internal/platform"
+	"github.com/metacubex/wazero/internal/version"
+	"github.com/metacubex/wazero/internal/wasm"
 )
 
 type (

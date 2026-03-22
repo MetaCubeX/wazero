@@ -5,8 +5,8 @@ import (
 	"io/fs"
 	"path"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/sys"
+	experimentalsys "github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/sys"
 )
 
 type AdaptFS struct {

@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/internal/leb128"
-	"github.com/tetratelabs/wazero/internal/wasm"
-	"github.com/tetratelabs/wazero/internal/wasmdebug"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/internal/leb128"
+	"github.com/metacubex/wazero/internal/wasm"
+	"github.com/metacubex/wazero/internal/wasmdebug"
 )
 
 // DecodeModule implements wasm.DecodeModule for the WebAssembly 1.0 (20191205) Binary Format

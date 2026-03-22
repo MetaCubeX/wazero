@@ -7,7 +7,7 @@ import (
 
 	"golang.org/x/sys/windows"
 
-	"github.com/tetratelabs/wazero/experimental/sys"
+	"github.com/metacubex/wazero/experimental/sys"
 )
 
 const (
