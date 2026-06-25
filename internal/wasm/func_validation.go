@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"maps"
 	"strconv"
 	"strings"
 
@@ -1725,7 +1724,7 @@ func (m *Module) validateFunctionWithMaxStackValues(
 				return fmt.Errorf("read block: %w", err)
 			}
 			controlBlockStack.push(pc, 0, 0, bt, num, 0)
-			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = maps.Clone(sts.initLocals)
+			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = mapsClone(sts.initLocals)
 			if err = valueTypeStack.popParams(op, bt.Params, false); err != nil {
 				return err
 			}
@@ -2114,7 +2113,7 @@ func (m *Module) validateFunctionWithMaxStackValues(
 				return fmt.Errorf("read block: %w", err)
 			}
 			controlBlockStack.push(pc, 0, 0, bt, num, op)
-			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = maps.Clone(sts.initLocals)
+			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = mapsClone(sts.initLocals)
 			if err = valueTypeStack.popParams(op, bt.Params, false); err != nil {
 				return err
 			}
@@ -2131,7 +2130,7 @@ func (m *Module) validateFunctionWithMaxStackValues(
 				return fmt.Errorf("read block: %w", err)
 			}
 			controlBlockStack.push(pc, 0, 0, bt, num, op)
-			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = maps.Clone(sts.initLocals)
+			controlBlockStack.stack[len(controlBlockStack.stack)-1].savedInitLocals = mapsClone(sts.initLocals)
 			if err = valueTypeStack.popAndVerifyType(ValueTypeI32); err != nil {
 				return fmt.Errorf("cannot pop the operand for 'if': %v", err)
 			}
@@ -2156,7 +2155,7 @@ func (m *Module) validateFunctionWithMaxStackValues(
 				return err
 			}
 			// Restore init locals to the state at if-entry for the else branch.
-			sts.initLocals = maps.Clone(bl.savedInitLocals)
+			sts.initLocals = mapsClone(bl.savedInitLocals)
 			// Before entering instructions inside else, we pop all the values pushed by then block.
 			valueTypeStack.resetAtStackLimit()
 			// Plus we have to push any block params again.
@@ -2822,4 +2821,18 @@ func slicesEqual[S ~[]E, E comparable](s1, s2 S) bool {
 		}
 	}
 	return true
+}
+
+// Clone returns a copy of m.  This is a shallow clone:
+// the new keys and values are set using ordinary assignment.
+func mapsClone[M ~map[K]V, K comparable, V any](m M) M {
+	// Preserve nil in case it matters.
+	if m == nil {
+		return nil
+	}
+	r := make(M, len(m))
+	for k, v := range m {
+		r[k] = v
+	}
+	return r
 }
