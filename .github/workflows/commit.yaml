@@ -1,13 +1,13 @@
 name: Test
 on:
   pull_request:
-    branches: [main]
+    branches: ['**']
     paths-ignore:  # ignore docs as they are built with Netlify.
       - '**/*.md'
       - 'site/**'
       - 'netlify.toml'
   push:
-    branches: [main]
+    branches: ['**']
     paths-ignore:  # ignore docs as they are built with Netlify.
       - '**/*.md'
       - 'site/**'
@@ -75,6 +75,11 @@ jobs:
         go-version:
           - "1.26"  # Current Go version
           - "1.25"  # Floor Go version of wazero (current - 1)
+          - "1.24"
+          - "1.23"
+          - "1.22"
+          - "1.21"
+          - "1.20"
 
     steps:
 
@@ -116,6 +121,11 @@ jobs:
         go-version:
           - "1.26"  # Current Go version
           - "1.25"  # Floor Go version of wazero (current - 1)
+          - "1.24"
+          - "1.23"
+          - "1.22"
+          - "1.21"
+          - "1.20"
         platform:
           - os: ubuntu-24.04
             arch: amd64
