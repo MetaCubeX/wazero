@@ -5,8 +5,8 @@ import (
 	"path"
 	"testing"
 
-	"github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/internal/testing/require"
 )
 
 func TestUnlink(t *testing.T) {

@@ -5,10 +5,10 @@ import (
 	_ "embed"
 	"testing"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/metacubex/wazero"
+	"github.com/metacubex/wazero/api"
+	"github.com/metacubex/wazero/experimental"
+	"github.com/metacubex/wazero/internal/testing/require"
 )
 
 //go:embed testdata/cpp_exceptions.wasm

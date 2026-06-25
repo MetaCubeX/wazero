@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/tetratelabs/wazero/internal/leb128"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/metacubex/wazero/internal/leb128"
+	"github.com/metacubex/wazero/internal/wasm"
 )
 
 const (

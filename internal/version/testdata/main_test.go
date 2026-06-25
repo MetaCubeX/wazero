@@ -3,8 +3,8 @@ package main
 import (
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/version"
+	"github.com/metacubex/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/internal/version"
 )
 
 // TestGetWazeroVersion ensures that GetWazeroVersion returns the version of wazero in the go.mod in the

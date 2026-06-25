@@ -1,10 +1,10 @@
 package amd64
 
 import (
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend/regalloc"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/ssa"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/wazevoapi"
+	"github.com/metacubex/wazero/internal/engine/wazevo/backend"
+	"github.com/metacubex/wazero/internal/engine/wazevo/backend/regalloc"
+	"github.com/metacubex/wazero/internal/engine/wazevo/ssa"
+	"github.com/metacubex/wazero/internal/engine/wazevo/wazevoapi"
 )
 
 var calleeSavedVRegs = []regalloc.VReg{

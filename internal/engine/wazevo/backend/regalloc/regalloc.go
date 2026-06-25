@@ -14,7 +14,7 @@ import (
 	"math"
 	"strings"
 
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/wazevoapi"
+	"github.com/metacubex/wazero/internal/engine/wazevo/wazevoapi"
 )
 
 // NewAllocator returns a new Allocator.

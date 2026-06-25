@@ -3,9 +3,9 @@ package arm64
 import (
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend/regalloc"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/internal/engine/wazevo/backend"
+	"github.com/metacubex/wazero/internal/engine/wazevo/backend/regalloc"
+	"github.com/metacubex/wazero/internal/testing/require"
 )
 
 func TestMachine_resolveAddressingMode(t *testing.T) {

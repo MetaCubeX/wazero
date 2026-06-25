@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/sys"
+	experimentalsys "github.com/metacubex/wazero/experimental/sys"
+	"github.com/metacubex/wazero/internal/testing/require"
+	"github.com/metacubex/wazero/sys"
 )
 
 func TestStat(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"net"
 	"syscall"
 
-	"github.com/tetratelabs/wazero/experimental/sys"
-	socketapi "github.com/tetratelabs/wazero/internal/sock"
+	"github.com/metacubex/wazero/experimental/sys"
+	socketapi "github.com/metacubex/wazero/internal/sock"
 )
 
 // MSG_PEEK is the constant syscall.MSG_PEEK

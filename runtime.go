@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/tetratelabs/wazero/api"
-	experimentalapi "github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/internal/engine/interpreter"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo"
-	"github.com/tetratelabs/wazero/internal/expctxkeys"
-	"github.com/tetratelabs/wazero/internal/platform"
-	internalsock "github.com/tetratelabs/wazero/internal/sock"
-	internalsys "github.com/tetratelabs/wazero/internal/sys"
-	"github.com/tetratelabs/wazero/internal/wasm"
-	binaryformat "github.com/tetratelabs/wazero/internal/wasm/binary"
-	"github.com/tetratelabs/wazero/sys"
+	"github.com/metacubex/wazero/api"
+	experimentalapi "github.com/metacubex/wazero/experimental"
+	"github.com/metacubex/wazero/internal/engine/interpreter"
+	"github.com/metacubex/wazero/internal/engine/wazevo"
+	"github.com/metacubex/wazero/internal/expctxkeys"
+	"github.com/metacubex/wazero/internal/platform"
+	internalsock "github.com/metacubex/wazero/internal/sock"
+	internalsys "github.com/metacubex/wazero/internal/sys"
+	"github.com/metacubex/wazero/internal/wasm"
+	binaryformat "github.com/metacubex/wazero/internal/wasm/binary"
+	"github.com/metacubex/wazero/sys"
 )
 
 // Runtime allows embedding of WebAssembly modules.
